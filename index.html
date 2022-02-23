@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">  
+    <title>Calculate Tax</title>
+    <link rel="stylesheet" href="tax.css">
+    <script src="tax.js"></script>
+
+    <script>
+        "use strict";
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
+        var calculatetotal = function(sale, tax) {
+      var total = (sale / tax);
+      total = total.toFixed(1);
+      return total;
+    };
+    var processEntries = function() {
+            var sale = parseFloat($("sale").value);
+            var tax = parseFloat($("tax").value);
+
+            if (isNaN(sale) || isNaN(tax)) {
+                alert("Both entries must be numeric");
+            } else if (isNaN(tax) || tax <= 0 || tax >= 100) {
+            alert(getErrorMsgTax("tax"));
+        focusAndSelect("#tax");
+            } else {
+                $("#total").value = (sale + calculateTax(sale, tax)).toFixed(2);
+            }
+        };
+    window.onload = function() {
+            $("calculate").onclick = processEntries;
+        };
+    </script>
+</head>
+<body>
+    <main>
+        <h1>Tax Calculator</h1>
+        <label for="sale">Sale Amount:</label>
+    <input type="text" id="sale"><br>
+        <label for="tax">Tax Percent:</label>
+        <input type="text" id="tax"><br>
+        <label for="total">Total:</label>
+        <input type="text" id="#total" disabled><br>
+        <label>&nbsp;</label>
+        <input type="button" id="calculate" value="Calculate Tax"><br>
+    </main>
+</body>
+</html>
